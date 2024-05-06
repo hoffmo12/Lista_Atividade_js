@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Formulário com JavaScript</title>
+</head>
+<body>
+
+    <form id="meuFormulario">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha">
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        const formulario = document.getElementById('meuFormulario');
+
+        formulario.addEventListener('submit', function(evento) {
+            evento.preventDefault(); 
+
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            if (nome === '' || email === '' || senha === '') {
+                alert('Preencha todos os campos');
+                return false;
+            }
+        });
+    </script>
+
+    <h2>Exibir o Maior Número</h2>
+
+    <label for="numero1">Digite o primeiro número:</label>
+    <input type="number" id="numero1" name="numero1">
+
+    <label for="numero2">Digite o segundo número:</label>
+    <input type="number" id="numero2" name="numero2">
+
+    <button onclick="exibirMaiorNumero()">Exibir Maior Número</button>
+
+    <p id="resultadoMaiorNumero"></p>
+
+    <script>
+        function exibirMaiorNumero() {
+            const numero1 = parseFloat(document.getElementById('numero1').value);
+            const numero2 = parseFloat(document.getElementById('numero2').value);
+
+            if (isNaN(numero1) || isNaN(numero2)) {
+                document.getElementById('resultadoMaiorNumero').textContent = "Por favor, insira numeros validos.";
+            } else {
+                const maiorNumero = Math.max(numero1, numero2);
+                document.getElementById('resultadoMaiorNumero').textContent = "O maior número é: " + maiorNumero;
+            }
+        }
+    </script>
+
+    <h2>Sistema de Notas</h2>
+
+    <label for="nota">Digite sua nota:</label>
+    <input type="number" id="nota" name="nota">
+
+    <button onclick="verificarNota()">Verificar</button>
+
+    <p id="mensagemSistemaNotas"></p>
+
+    <script>
+        function verificarNota() {
+            const nota = parseFloat(document.getElementById('nota').value);
+
+            if (isNaN(nota)) {
+                document.getElementById('mensagemSistemaNotas').textContent = "Por favor, insira uma nota válida.";
+            } else {
+                if (nota < 6) {
+                    document.getElementById('mensagemSistemaNotas').textContent = "Reprovado";
+                } else if (nota >= 6 && nota < 8) {
+                    document.getElementById('mensagemSistemaNotas').textContent = "Aprovado";
+                } else {
+                    document.getElementById('mensagemSistemaNotas').textContent = "Aprovado com louvor";
+                }
+            }
+        }
+    </script>
+
+    <h2>Cálculo da Média</h2>
+
+    <p>Insira os números separados por vírgula (ex: 1, 2, 3, 4):</p>
+    <input type="text" id="numeros">
+    <button onclick="calcularMedia()">Calcular Média</button>
+
+    <p id="resultadoMedia"></p>
+
+    <script>
+        function calcularMedia() {
+            const numerosString = document.getElementById('numeros').value;
+            const numerosArray = numerosString.split(',').map(Number); 
+
+            let soma = 0;
+            for (let i = 0; i < numerosArray.length; i++) {
+                soma += numerosArray[i];
+            }
+
+            const media = soma / numerosArray.length;
+
+            document.getElementById('resultadoMedia').textContent = "A média dos números é: " + media.toFixed(2); 
+        }
+    </script>
+
+    <h2>Insira alguma letra</h2>
+
+    <p>Insira uma letra:</p>
+    <input type="text" id="variavel">
+    <button onclick="verificarVariavel()">Verificar</button>
+
+    <p id="mensagemVariavel"></p>
+
+    <script>
+        function verificarVariavel() {
+            const variavel = document.getElementById('variavel').value;
+
+            if (variavel === 'a') {
+                document.getElementById('mensagemVariavel').textContent = "A";
+            } else if (variavel === 'b') {
+                document.getElementById('mensagemVariavel').textContent = "B";
+            } else {
+                document.getElementById('mensagemVariavel').textContent = "Outra letra";
+            }
+        }
+    </script>
+
+    <h2>Cálculo da Soma dos Elementos de uma Matriz</h2>
+
+    <p>Insira os elementos da matriz separados por vírgula e espaço (ex: 1, 2, 3, 4):</p>
+    <input type="text" id="matriz">
+    <button onclick="calcularSomaMatriz()">Calcular Soma</button>
+
+    <p id="resultadoSomaMatriz"></p>
+
+    <script>
+        function calcularSomaMatriz() {
+            const matrizString = document.getElementById('matriz').value;
+            const matrizArray = matrizString.split(',').map(Number);
+
+            const soma = matrizArray.reduce((total, numero) => total + numero, 0);
+
+            document.getElementById('resultadoSomaMatriz').textContent = "A soma dos elementos da matriz é: " + soma;
+        }
+    </script>
+
+    <h2>Cálculo do Fatorial</h2>
+
+    <p>Insira um número para calcular o fatorial:</p>
+    <input type="number" id="numeroFatorial">
+    <button onclick="calcularFatorial()">Calcular Fatorial</button>
+
+    <p id="resultadoFatorial"></p> <!-- Aqui será exibido o resultado do cálculo do fatorial -->
+
+    <script>
+        function calcularFatorial() {
+            const numero = parseInt(document.getElementById('numeroFatorial').value);
+
+            if (isNaN(numero) || numero < 0) {
+                document.getElementById('resultadoFatorial').textContent = "Por favor, insira um número inteiro não negativo.";
+                return;
+            }
+
+            let fatorial = 1;
+            for (let i = 2; i <= numero; i++) {
+                fatorial *= i;
+            }
+
+            document.getElementById('resultadoFatorial').textContent = "O fatorial de " + numero + " é: " + fatorial;
+        }
+    </script>
+
+    <h2>Menu de Opções</h2>
+
+    <label for="opcoes">Escolha uma opção:</label>
+    <select id="opcoes">
+        <option value="1">1. Opção 1</option>
+        <option value="2">2. Opção 2</option>
+        <option value="3">3. Opção 3</option>
+    </select>
+
+    <button onclick="exibirMensagem()">Selecionar</button>
+
+    <p id="mensagem"></p>
+
+    <script>
+        function exibirMensagem() {
+            const opcaoSelecionada = document.getElementById('opcoes').value;
+
+            switch (opcaoSelecionada) {
+                case '1':
+                    document.getElementById('mensagem').textContent = "Opção 1 escolhida";
+                    break;
+                case '2':
+                    document.getElementById('mensagem').textContent = "Opção 2 escolhida";
+                    break;
+                case '3':
+                    document.getElementById('mensagem').textContent = "Opção 3 escolhida";
+                    break;
+                default:
+                    document.getElementById('mensagem').textContent = "Opção inválida";
+            }
+        }
+    </script>
+
+    <h2>Encontrar o Maior Número em um Vetor</h2>
+
+    <p>Insira os números separados por vírgula (ex: 1, 2, 3, 4):</p>
+    <input type="text" id="numeros">
+    <button onclick="encontrarMaiorNumero()">Encontrar Maior Número</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function encontrarMaiorNumero() {
+            const numerosString = document.getElementById('numeros').value;
+            const numerosArray = numerosString.split(',').map(Number); 
+
+            if (numerosArray.some(isNaN)) {
+                document.getElementById('resultado').textContent = "Por favor, insira números válidos separados por vírgula.";
+            } else {
+                const maiorNumero = Math.max(...numerosArray);
+                document.getElementById('resultado').textContent = "O maior número é: " + maiorNumero;
+            }
+        }
+    </script>
+
+    <h2>Cálculo da Média de uma Matriz</h2>
+
+    <p>Insira os elementos da matriz separados por vírgula e espaço (ex: 1, 2, 3, 4):</p>
+    <input type="text" id="matriz">
+    <button onclick="calcularMediaMatriz()">Calcular Média</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function calcularMediaMatriz() {
+            const matrizString = document.getElementById('matriz').value;
+            const matrizArray = matrizString.split(',').map(Number);
+
+            if (matrizArray.some(isNaN)) {
+                document.getElementById('resultado').textContent = "Por favor, insira números válidos separados por vírgula e espaço.";
+            } else {
+                const soma = matrizArray.reduce((total, numero) => total + numero, 0);
+                const media = soma / matrizArray.length;
+                document.getElementById('resultado').textContent = "A média dos elementos da matriz é: " + media.toFixed(2);
+            }
+        }
+    </script>
+
+</body>
+</html>
